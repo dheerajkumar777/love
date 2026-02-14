@@ -1,3 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Queen ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    background: radial-gradient(circle at top, #1a1a2e, #16213e);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+}
+
+.card{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    padding:25px;
+    width:90%;
+    max-width:380px;
+    border-radius:25px;
+    box-shadow:0 0 30px rgba(255,255,255,0.2);
+}
+
+h1{font-size:26px;}
+p{font-size:15px; margin:15px 0;}
+
+.buttons{
+    position:relative;
+    height:150px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    position:absolute;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:white;
+    color:#ff4e8a;
+    left:20%;
+}
+
+#noBtn{
+    background:#444;
+    color:white;
+    right:20%;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+.success{
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>My Queen 🌙✨</h1>
+    <p>
+        In this whole universe of stars...  
+        you are my brightest one.  
+        Dheeraj belongs only to you. 💖  
+    </p>
+    <h2>Will You Be My Valentine?</h2>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="sayYes()">Yes Dheeraj 💍</button>
+        <button id="noBtn" ontouchstart="moveNo()" onmouseover="moveNo()">No 😜</button>
+    </div>
+</div>
+
 <script>
 
 let noCount = 0;
@@ -5,41 +107,33 @@ let noCount = 0;
 function moveNo(){
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const container = document.querySelector(".buttons");
 
     noCount++;
 
-    // Get container size
-    const maxX = container.clientWidth - noBtn.offsetWidth;
-    const maxY = container.clientHeight - noBtn.offsetHeight;
+    // Teleport anywhere
+    noBtn.style.left = Math.random()*300 + "px";
+    noBtn.style.top = Math.random()*120 + "px";
 
-    // Random position inside container
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-
-    // Shrink No button
-    let size = 1 - (noCount * 0.15);
-    if(size < 0.3) size = 0.3;
+    // Shrink No (FIXED)
+    let size = 1 - (noCount*0.15);
+    if(size < 0.1) size = 0.1;
     noBtn.style.transform = `scale(${size})`;
 
-    // Grow Yes button
-    yesBtn.style.transform = `scale(${1 + noCount * 0.2})`;
+    // Grow Yes (FIXED)
+    yesBtn.style.transform = `scale(${1 + noCount*0.2})`;
 
-    if(noCount == 2) alert("Are you sure My Queen? 🥺");
-    if(noCount == 4) alert("Dheeraj's heart will break 😭");
-    if(noCount >= 6) noBtn.innerHTML = "Too late 😏";
+    if(noCount==2) alert("Are you sure My Queen? 🥺");
+    if(noCount==4) alert("Dheeraj's heart will break 😭");
+    if(noCount>=6) noBtn.innerHTML="Too late 😏";
 }
 
 function sayYes(){
-    document.body.innerHTML = `
+    document.body.innerHTML=`
         <div class="success">
             <h1>She Said YES!!! 💍❤️</h1>
             <p style="margin-top:20px;">
-                My Queen chose Dheeraj 💖<br>
-                This love story just became legendary ✨
+                My Queen chose Dheeraj 💖  
+                This love story just became legendary ✨  
             </p>
         </div>
     `;
@@ -50,12 +144,12 @@ function sayYes(){
 }
 
 function createHeart(){
-    const heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "absolute";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.top = Math.random()*100 + "vh";
-    heart.style.fontSize = Math.random()*20 + 15 + "px";
+    const heart=document.createElement("div");
+    heart.innerHTML="💖";
+    heart.style.position="absolute";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.top=Math.random()*100+"vh";
+    heart.style.fontSize=Math.random()*20+15+"px";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),4000);
 }
@@ -70,3 +164,6 @@ for(let i=0;i<100;i++){
 }
 
 </script>
+
+</body>
+</html>
