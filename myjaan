@@ -1,0 +1,72 @@
+<script>
+
+let noCount = 0;
+
+function moveNo(){
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const container = document.querySelector(".buttons");
+
+    noCount++;
+
+    // Get container size
+    const maxX = container.clientWidth - noBtn.offsetWidth;
+    const maxY = container.clientHeight - noBtn.offsetHeight;
+
+    // Random position inside container
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+
+    // Shrink No button
+    let size = 1 - (noCount * 0.15);
+    if(size < 0.3) size = 0.3;
+    noBtn.style.transform = `scale(${size})`;
+
+    // Grow Yes button
+    yesBtn.style.transform = `scale(${1 + noCount * 0.2})`;
+
+    if(noCount == 2) alert("Are you sure My Queen? 🥺");
+    if(noCount == 4) alert("Dheeraj's heart will break 😭");
+    if(noCount >= 6) noBtn.innerHTML = "Too late 😏";
+}
+
+function sayYes(){
+    document.body.innerHTML = `
+        <div class="success">
+            <h1>She Said YES!!! 💍❤️</h1>
+            <p style="margin-top:20px;">
+                My Queen chose Dheeraj 💖<br>
+                This love story just became legendary ✨
+            </p>
+        </div>
+    `;
+
+    for(let i=0;i<80;i++){
+        createHeart();
+    }
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "absolute";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.top = Math.random()*100 + "vh";
+    heart.style.fontSize = Math.random()*20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+}
+
+// Create stars
+for(let i=0;i<100;i++){
+    const star=document.createElement("div");
+    star.classList.add("star");
+    star.style.left=Math.random()*100+"vw";
+    star.style.top=Math.random()*100+"vh";
+    document.body.appendChild(star);
+}
+
+</script>
